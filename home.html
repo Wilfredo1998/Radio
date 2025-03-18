@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio streaming</title>
+    <link rel="stylesheet" href="style/Radio.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="w-full h-full min-h-screen">
+    <!--Encabezado[n1]-->
+    <header class="w-[100%] sm:h-17 bg-blue-500 flex flex-col sm:flex-row">
+        <div class="h-13  sm:h-full flex flex-row sm:justify-center gap-2">
+            <p class="bg-red-200 sm:w-20 w-16">Logo</p>
+            <p class="sm:w-100">Voz fuerte de dios</p>
+        </div>
+        <!--Reproductor[n2]-->
+        <div id="reproductor" class="h-full ">
+
+            <audio id="radio" crossorigin="anonymous">
+                <source src="https://cast6.my-control-panel.com/proxy/fuentede/stream" type="audio/mpeg">
+            </audio>
+            <!--Botones[n2]-->
+            <div class="h-full sm:flex sm:items-center">
+                
+                <div class="h-full sm:flex sm:items-center">
+                    <!--Visual-->
+                    <canvas id="visualizer" class="bg-black h-20 sm:h-full w-full sm:w-150" ></canvas>
+                    <button class="pl-4" onclick="playRadio()">Play</button>
+                    <button class="pl-4" onclick="pauseRadio()">Stop</button>
+                    <button id="muted_boton" class="pl-4" onclick="muteRadio()">Mute</button>
+                </div>
+                <div class="pl-4">
+                    <label>Volumen:</label>
+                    <input class="" type="range" id="volume" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <div class="w-full bg-red-900 flex justify-center">
+        <img class="w-200 p-4 object-contain" src="./style/utility/images/biblia.jpeg" alt="Biblia">
+    </div>
+    <div class="w-full bg-red-900 flex justify-center">
+        <img class="w-200 p-4 object-contain" src="./style/utility/images/biblia.jpeg" alt="Biblia">
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+   
+    
+</body>
+    <script src="javascript/archivo.js"></script>
+</html>
