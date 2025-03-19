@@ -3,51 +3,71 @@ const ctx = canvas.getContext("2d");
 const volumeControl = document.getElementById("volume");
 let audioContext, analyser, source, dataArray, bufferLength;
 const audio = document.querySelector("audio");
-let valor = true;
-let pas = true;
+
+
+
 
 function playRadio() {
     if (!audioContext) {
         initVisualizer();
     }
+    document.getElementById("P_a_s").src = "./style/utility/images/stop.png";
     audio.play();
 }
 
 function pauseRadio() {
+    document.getElementById("P_a_s").src = "./style/utility/images/Play.png";
     audio.pause();
 }
 
 function muteRadio() {
     
-    if(valor){
-        muted1()
-    }else{
+    if(audio.muted){
         muted2()
+        if(audio.volume > 0){
+        document.getElementById("muted_boton").src = "./style/utility/images/Con_sonido.png";
+        document.getElementById("muted_boton2").src = "./style/utility/images/Con_sonido.png";
+        }
+        
+    }else{
+        muted1()
+        document.getElementById("muted_boton").src = "./style/utility/images/Sin_sonido.png";
+        document.getElementById("muted_boton2").src = "./style/utility/images/Sin_sonido.png";
     }
-   valor = !valor;
+
 }
-function muted2(){
-    audio.muted = false
-    document.querySelector('#muted_boton').style.color="black"
+function muted2() {
+    audio.muted = false;
+    if (audio.volume > 0) {
+        document.getElementById("muted_boton").src = "./style/utility/images/Con_sonido.png";
+        document.getElementById("muted_boton2").src = "./style/utility/images/Con_sonido.png";
+    }
 }
 
-function muted1(){
-    audio.muted = true
-    document.querySelector('#muted_boton').style.color="red"
+function muted1() {
+    audio.muted = true;
+    document.getElementById("muted_boton").src = "./style/utility/images/Sin_sonido.png";
+    document.getElementById("muted_boton2").src = "./style/utility/images/Sin_sonido.png";
 }
+
 
 function setVolume(value) {
     audio.volume = value;
+    if (audio.volume === 0) {
+        muted1()
+    }
+    else{
+        muted2()
+    }
 }
 
 function PlayAndStop(){
 
-    if(pas){
-        playRadio()
-    }else{
-        pauseRadio()
+    if (audio.paused) {
+        playRadio();
+    } else {
+        pauseRadio(); 
     }
-    pas = !pas;
 
 }
 
