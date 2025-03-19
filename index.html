@@ -10,59 +10,41 @@
 </head>
 <body class="w-full h-full min-h-screen">
     <!--Encabezado[n1]-->
-    <header class="w-[100%] sm:h-17 bg-blue-500 flex flex-col sm:flex-row">
-        <div class="h-13  sm:h-full flex flex-row sm:justify-center gap-2">
-            <p class="bg-red-200 sm:w-20 w-16">Logo</p>
-            <p class="sm:w-100">Voz fuerte de dios</p>
+    <header class="w-full h-60 lg:h-20 bg-blue-500 flex flex-col lg:flex-row  lg:justify-between">
+        
+        <div class="h-16 lg:h-full flex flex-row items-center lg:justify-center gap-2">
+            <div class="bg-red-200 w-16 lg:w-20 h-full flex justify-center items-center">
+                <img class="h-full p-1" src="./style/utility/images/Logo_E.png" alt="Imagen Logo">
+            </div>
+            <p class="lg:w-40 lg:w-auto flex items-center text-xl">Voz fuerte de Dios</p>
         </div>
-        <!--Reproductor[n2]-->
-        <div id="reproductor" class="h-full ">
-
-            <audio id="radio" crossorigin="anonymous">
-                <source src="https://cast6.my-control-panel.com/proxy/fuentede/stream" type="audio/mpeg">
-            </audio>
-            <!--Botones[n2]-->
-            <div class="h-full sm:flex sm:items-center">
-                
-                <div class="h-full sm:flex sm:items-center">
-                    <!--Visual-->
-                    <canvas id="visualizer" class="bg-black h-20 sm:h-full w-full sm:w-150" ></canvas>
-                    <button class="pl-4" onclick="playRadio()">Play</button>
-                    <button class="pl-4" onclick="pauseRadio()">Stop</button>
-                    <button id="muted_boton" class="pl-4" onclick="muteRadio()">Mute</button>
-                </div>
-                <div class="pl-4">
-                    <label>Volumen:</label>
-                    <input class="" type="range" id="volume" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
-                </div>
-
+    
+        <!-- Reproductor -->
+        <div id="reproductor" class="h-full flex flex-col lg:flex-row lg:items-center w-full lg:w-auto">
+            <canvas id="visualizer" class="bg-black h-20 lg:h-32 sm:h-20 lg:h-full w-full lg:w-[700px]"></canvas>
+            
+            <!-- Botones -->
+            <div class="flex flex-row items-center justify-center space-x-4 p-2">
+                <button class="h-12 lg:h-full bg-yellow-100 p-2" onclick="PlayAndStop()">
+                    <img class="h-10 lg:h-10" src="./style/utility/images/Play.png" alt="Play">
+                </button>
+                <button class="h-12 lg:h-full bg-yellow-100 p-2" onclick="pauseRadio()">
+                    <img class="h-10 lg:h-10" src="./style/utility/images/Play.png" alt="Pause">
+                </button>
+                <button id="muted_boton" class="h-12 lg:h-full bg-yellow-100 p-2" onclick="muteRadio()">
+                    <img class="h-10 lg:h-10" src="./style/utility/images/Play.png" alt="Mute">
+                </button>
+            </div>
+    
+            <div class="flex items-center justify-center px-3">
+                <label for="volume">Volumen:</label>
+                <input type="range" id="volume" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
             </div>
         </div>
-
     </header>
 
-
-
-    <div class="w-full bg-red-900 flex justify-center">
-        <img class="w-200 p-4 object-contain" src="./style/utility/images/biblia.jpeg" alt="Biblia">
-    </div>
-    <div class="w-full bg-red-900 flex justify-center">
-        <img class="w-200 p-4 object-contain" src="./style/utility/images/biblia.jpeg" alt="Biblia">
-    </div>
-  
-
-
-
-
-
-
-
-
-
-
-
-   
     
+      
 </body>
     <script src="javascript/archivo.js"></script>
 </html>

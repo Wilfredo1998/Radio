@@ -4,6 +4,7 @@ const volumeControl = document.getElementById("volume");
 let audioContext, analyser, source, dataArray, bufferLength;
 const audio = document.querySelector("audio");
 let valor = true;
+let pas = true;
 
 function playRadio() {
     if (!audioContext) {
@@ -39,6 +40,16 @@ function setVolume(value) {
     audio.volume = value;
 }
 
+function PlayAndStop(){
+
+    if(pas){
+        playRadio()
+    }else{
+        pauseRadio()
+    }
+    pas = !pas;
+
+}
 
 function initVisualizer() {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
