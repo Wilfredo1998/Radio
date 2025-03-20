@@ -15,25 +15,25 @@
 
 
     <!--Encabezado[n1]-->
-    <header class="w-full h-65 lg:h-20 bg-blue-500 flex flex-col lg:flex-row  lg:justify-between border-2 border-solid p-1">
+    <header class="w-full h-65 lg:h-20 bg-blue-500 flex flex-col lg:flex-row  lg:justify-between lg:p-1">
         
         <div class="h-16 lg:h-full flex flex-row items-center lg:justify-center gap-2">
             <div class="bg-red-200 w-16 lg:w-20 h-full flex justify-center items-center">
-                <img class="h-full p-1" src="./style/utility/images/Logo_E.png" alt="Imagen Logo">
+                <img class="h-full p-1" src="./style/utility/images/New_logo.png" alt="Imagen Logo">
             </div>
             <p class="lg:w-40 lg:w-auto flex items-center text-xl">Voz fuerte de Dios</p>
         </div>
         
         <!-- Reproductor -->
         <div id="reproductor" class="h-full flex flex-col lg:flex-row lg:items-center w-full lg:w-auto">
-            <canvas id="visualizer" class="bg-black h-20 lg:h-32 sm:h-20 lg:h-full w-full lg:w-[700px]"></canvas>
+            <canvas id="visualizer" class="bg-white h-20 lg:h-32 sm:h-20 lg:h-full w-full lg:w-[700px] lg:rounded-full"></canvas>
             
             <!-- Botones -->
             <div class="flex flex-row items-center justify-center space-x-4 p-2">
-                <button class="h-12 lg:h-full p-2 cursor-pointer hover:bg-blue-700 rounded-full flex w-[68px] lg:border-0 items-center justify-center sm:w-24" onclick="PlayAndStop()">
+                <button class="h-12 lg:h-full p-2 cursor-pointer rounded-full flex w-[68px] lg:border-0 items-center justify-center sm:w-24" onclick="PlayAndStop()">
                     <img id="P_a_s" class="h-10 lg:h-10" src="./style/utility/images/Play.png" alt="Play">
                 </button>
-                <button  class="h-12 lg:h-full  p-2  hidden  lg:block" onclick="muteRadio()">
+                <button  class="h-12 lg:h-full  p-2  hidden  lg:block lg:max-w-[60px]" onclick="muteRadio()">
                     <img id="muted_boton" class="muted_boton h-10 lg:h-10 cursor-pointer" src="./style/utility/images/Con_sonido.png" alt="Mute">
                 </button>
                 
@@ -41,7 +41,7 @@
             
             <div class="flex items-center justify-center px-3">
                 <div class="flex items-center space-x-2">
-                    <button class="h-10 p-2 lg:hidden block" onclick="muteRadio()">
+                    <button class="h-10 p-2 lg:hidden block w-[45px]" onclick="muteRadio()">
                         <img id="muted_boton2" class="muted_boton h-full" src="./style/utility/images/Con_sonido.png" alt="Mute">
                     </button>
                     <label for="volume">Volumen:</label>
@@ -51,13 +51,60 @@
         </div>
     </header>
 
-    <div class="w-full bg-red-900 flex justify-center">
-        <img class="w-200 p-4 object-contain" src="./style/utility/images/biblia.jpeg" alt="Biblia">
-    </div>
-    <div class="w-full bg-red-900 flex justify-center">
-        <img class="w-200 p-4 object-contain" src="./style/utility/images/biblia.jpeg" alt="Biblia">
+    <div class="w-full bg-white flex justify-center p-2">
+        <div id="default-carousel" class="relative w-full " data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                 <!-- Item 1 -->
+                <div class="hidden duration-500 ease-in-out" data-carousel-item>
+                    <img src="./style/utility/images/biblia.jpeg" class="w-200 absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-500 ease-in-out" data-carousel-item>
+                    <img src="./style/utility/images/Texto del párrafo.png" class="w-200 absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+            </div>
+            <!-- Slider indicators -->
+            <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+            </div>
+            <!-- Slider controls -->
+        </div>
     </div>
       
+    <div class="w-full bg-white flex justify-center p-2">
+        <div id="default-carousel" class="relative w-full " data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                 <!-- Item 1 -->
+                <div class="hidden duration-900 ease-in-out" data-carousel-item>
+                    <img src="./style/utility/images/Radio_foto.jpeg" class="w-200 absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-900 ease-in-out" data-carousel-item>
+                    <img src="./style/utility/images/Texto del párrafo.png" class="w-200 absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+            </div>
+            <!-- Slider indicators -->
+            <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+            </div>
+            <!-- Slider controls -->
+        </div>
+    </div>
+
+
+    <footer class="w-full h-65 lg:h-30 bg-blue-500">
+
+    </footer>
+
+
+
+
 </body>
     <script src="javascript/archivo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+
 </html>
