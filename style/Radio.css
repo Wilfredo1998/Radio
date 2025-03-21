@@ -1,5 +1,46 @@
 
-body { 
-    font-family: Arial, sans-serif;
+
+.customBlueLight{
+    background-color: #2baae2
+}
+
+.customBlueDark{
+    background-color: #1172BA; 
+}
+
+.customBlueDarker{
+    background-color: #04537f
+}
+
+.darkGreyishBlue{
+    background-color: #4D5B72;;
+}
+.GrayLavender{
+    background-color: #A4A3A4;
+}
+
+
+@font-face {
+    font-family: "AvenirBookOblique";
+    src: url("./utility/FontAvenir/BookOblique/AvenirLTStd-BookOblique.woff2") format("woff2"),
+         url("./utility/FontAvenir/BookOblique/AvenirLTStd-BookOblique.woff") format("woff");
+    font-weight: 400;
+    font-style: oblique;
+}
+
+@font-face {
+    font-family: "AvenirMediumOblique";
+    src: url("./utility/FontAvenir/MediumOblique/AvenirLTStd-MediumOblique.woff2") format("woff2"),
+         url("./utility/FontAvenir/MediumOblique/AvenirLTStd-MediumOblique.woff") format("woff");
+    font-weight: 500;
+    font-style: oblique;
+}
+
+@font-face {
+    font-family: "AvenirBlackOblique";
+    src: url("./utility/FontAvenir/BlackOblique/AvenirLTStd-BlackOblique.woff2") format("woff2"),
+         url("./utility/FontAvenir/BlackOblique/AvenirLTStd-BlackOblique.woff") format("woff");
+    font-weight: 900;
+    font-style: oblique;
 }
 

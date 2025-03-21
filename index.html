@@ -15,31 +15,32 @@
 
 
     <!--Encabezado[n1]-->
-    <header class="w-full h-65 lg:h-20 bg-blue-500 flex flex-col lg:flex-row  lg:justify-between lg:p-1">
+    <header class="w-full h-65 lg:h-20 lg:bg-[#1172BA] flex flex-col lg:flex-row  lg:justify-between lg:p-1">
         
         <div class="h-16 lg:h-full flex flex-row items-center lg:justify-center gap-2">
-            <div class="bg-red-200 w-16 lg:w-20 h-full flex justify-center items-center">
+            <div class=" w-16 lg:w-20 h-full flex justify-center items-center">
                 <img class="h-full p-1" src="./style/utility/images/New_logo.png" alt="Imagen Logo">
             </div>
-            <p class="lg:w-40 lg:w-auto flex items-center text-xl">Voz fuerte de Dios</p>
+            <h1 class=" lg:w-40 lg:w-auto flex items-center text-xl h-full font-[AvenirBlackOblique]">Voz fuerte de Dios</h1>
         </div>
         
         <!-- Reproductor -->
         <div id="reproductor" class="h-full flex flex-col lg:flex-row lg:items-center w-full lg:w-auto">
             <canvas id="visualizer" class="bg-white h-20 lg:h-32 sm:h-20 lg:h-full w-full lg:w-[700px] lg:rounded-full"></canvas>
             
-            <!-- Botones -->
-            <div class="flex flex-row items-center justify-center space-x-4 p-2">
+            
+            
+            <div class="bg-[#1172BA] lg:flex lg:flex-row lg:items-center">
+                <!-- Botones -->
+            <div class="flex flex-row items-center justify-center space-x-4 p-2 ">
                 <button class="h-12 lg:h-full p-2 cursor-pointer rounded-full flex w-[68px] lg:border-0 items-center justify-center sm:w-24" onclick="PlayAndStop()">
                     <img id="P_a_s" class="h-10 lg:h-10" src="./style/utility/images/Play.png" alt="Play">
                 </button>
                 <button  class="h-12 lg:h-full  p-2  hidden  lg:block lg:max-w-[60px]" onclick="muteRadio()">
                     <img id="muted_boton" class="muted_boton h-10 lg:h-10 cursor-pointer" src="./style/utility/images/Con_sonido.png" alt="Mute">
                 </button>
-                
             </div>
-            
-            <div class="flex items-center justify-center px-3">
+            <div class="flex items-center justify-center px-3 ">
                 <div class="flex items-center space-x-2">
                     <button class="h-10 p-2 lg:hidden block w-[45px]" onclick="muteRadio()">
                         <img id="muted_boton2" class="muted_boton h-full" src="./style/utility/images/Con_sonido.png" alt="Mute">
@@ -48,6 +49,8 @@
                     <input class="cursor-pointer" type="range" id="volume" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
                 </div>
             </div>
+            </div>
+            
         </div>
     </header>
 
@@ -96,8 +99,8 @@
     </div>
 
 
-    <footer class="w-full h-65 lg:h-30 bg-blue-500">
-
+    <footer class="customBlueDark w-full h-65 lg:h-30">
+        
     </footer>
 
 
