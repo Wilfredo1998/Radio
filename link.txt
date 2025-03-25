@@ -1,2 +1,15 @@
-Prueba:
+Real:
 https://cast6.my-control-panel.com/proxy/fuentede/stream
+
+Prueba:
+https://streaming.serveraudio.net/stream/radioven1200/stream
+
+// Ajustar la altura del carrusel
+function adjustCarouselHeight(image) {
+    const carousel = document.querySelector("#carrusel1");
+    if (!carousel) return;
+
+    const imgHeight = image.height;
+    carousel.style.height = imgHeight + "px";
+    console.log(`🔹 Carrusel ajustado a ${imgHeight}px`);
+}

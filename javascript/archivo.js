@@ -98,3 +98,77 @@ function drawVisualizer() {
         x += barWidth + 1;
     }
 }
+
+async function loadImages() {
+    try {
+        const response = await fetch("http://localhost:3000/imagenes");
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+
+        const images = await response.json();
+        console.log("✅ Imágenes recibidas:", images);
+
+        const carouselWrapper = document.querySelector("#carrusel2 .carousel-content");
+        if (!carouselWrapper) {
+            console.error("❌ Error: No se encontró el contenedor del carrusel.");
+            return;
+        }
+
+        // Limpiar imágenes previas
+        carouselWrapper.innerHTML = "";
+
+        if (images.length === 0) {
+            console.error("❌ Error: No se encontraron imágenes.");
+            return;
+        }
+
+        images.forEach((image) => {
+            let div = document.createElement("div");
+            div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
+        
+            let div2 = document.createElement("div");
+            div2.classList.add("w-200");
+        
+            let img = document.createElement("img");
+            img.classList.add("w-full", "h-full", "object-contain");
+            img.src = `http://localhost:3000/imagenes/${image}`;
+            img.alt = "Imagen del carrusel";
+        
+            // Agregar img dentro de div2
+            div2.appendChild(img);
+        
+            // Agregar div2 dentro de div
+            div.appendChild(div2);
+        
+            // Agregar div al contenedor principal
+            carouselWrapper.appendChild(div);
+        });
+
+        console.log("✅ Imágenes agregadas al DOM.");
+
+        if (images.length > 1) {
+            startCarousel();
+        }
+    } catch (error) {
+        console.error("❌ Error cargando imágenes:", error);
+    }
+}
+
+function startCarousel() {
+    const carousel = document.querySelector("#carrusel2 .carousel-content");
+    const items = document.querySelectorAll("#carrusel2 .carousel-item");
+    let index = 0;
+
+    console.log("📸 Total imágenes en el carrusel:", items.length);
+
+    if (items.length === 0) {
+        console.error("❌ No hay imágenes en el carrusel.");
+        return;
+    }
+
+    setInterval(() => {
+        index = (index + 1) % items.length;
+        carousel.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000);
+}
+
+loadImages();
