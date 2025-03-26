@@ -57,6 +57,7 @@ http.createServer((req, res) => {
     } else if (req.url === "/imagenes2") {
         fs.readdir(imageFolder2, (err, files) => {
             if (err) {
+                console.error("❌ Error leyendo carrusel_2:", err);
                 res.writeHead(500, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "No se pudieron leer las imágenes" }));
                 return;
