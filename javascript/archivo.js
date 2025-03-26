@@ -164,5 +164,8 @@ function startCarousel(carruselId) {
     }, 3000);
 }
 
+console.log("Ruta de carrusel_1:", response1);
+console.log("Ruta de carrusel_2:", response2);
+
 loadImages();
 
