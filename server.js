@@ -4,6 +4,10 @@ const path = require("path");
 
 const imageFolder1 = path.join(__dirname, "style/utility/carrusel_1");
 const imageFolder2 = path.join(__dirname, "style/utility/carrusel_2");
+
+console.log("Ruta de carrusel_1[server]:", response1);
+console.log("Ruta de carrusel_2:[server]", response2);
+
 const jsFolder = path.join(__dirname, "javascript");
 const cssFolder = path.join(__dirname, "style"); //Carpeta CSS
 
