@@ -101,67 +101,68 @@ function drawVisualizer() {
 
 async function loadImages() {
     try {
-        const response = await fetch("http://localhost:3000/imagenes");
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-
-        const images = await response.json();
-        console.log("✅ Imágenes recibidas:", images);
-
-        const carouselWrapper = document.querySelector("#carrusel2 .carousel-content");
-        if (!carouselWrapper) {
-            console.error("❌ Error: No se encontró el contenedor del carrusel.");
-            return;
-        }
-
-        // Limpiar imágenes previas
-        carouselWrapper.innerHTML = "";
-
-        if (images.length === 0) {
-            console.error("❌ Error: No se encontraron imágenes.");
-            return;
-        }
-
-        images.forEach((image) => {
-            let div = document.createElement("div");
-            div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
+        const response1 = await fetch("http://localhost:3000/imagenes1");
+        const response2 = await fetch("http://localhost:3000/imagenes2");
         
-            let div2 = document.createElement("div");
-            div2.classList.add("w-200");
-        
-            let img = document.createElement("img");
-            img.classList.add("w-full", "h-full", "object-contain");
-            img.src = `http://localhost:3000/imagenes/${image}`;
-            img.alt = "Imagen del carrusel";
-        
-            // Agregar img dentro de div2
-            div2.appendChild(img);
-        
-            // Agregar div2 dentro de div
-            div.appendChild(div2);
-        
-            // Agregar div al contenedor principal
-            carouselWrapper.appendChild(div);
-        });
+        if (!response1.ok || !response2.ok) throw new Error(`Error HTTP: ${response1.status} - ${response2.status}`);
 
-        console.log("✅ Imágenes agregadas al DOM.");
+        const images1 = await response1.json();
+        const images2 = await response2.json();
+        console.log("Imágenes recibidas para carrusel1:", images1);
+        console.log("Imágenes recibidas para carrusel2:", images2);
 
-        if (images.length > 1) {
-            startCarousel();
-        }
+        updateCarousel("#carrusel1", images1, "carrusel_1");
+        updateCarousel("#carrusel2", images2, "carrusel_2");
     } catch (error) {
         console.error("❌ Error cargando imágenes:", error);
     }
 }
 
-function startCarousel() {
-    const carousel = document.querySelector("#carrusel2 .carousel-content");
-    const items = document.querySelectorAll("#carrusel2 .carousel-item");
+function updateCarousel(carruselId, images, folder) {
+    const carouselWrapper = document.querySelector(`${carruselId} .carousel-content`);
+    if (!carouselWrapper) {
+        console.error(`Error: No se encontró el contenedor de ${carruselId}`);
+        return;
+    }
+
+    carouselWrapper.innerHTML = "";
+
+    if (images.length === 0) {
+        console.error(`No se encontraron imágenes en ${folder}.`);
+        return;
+    }
+
+    images.forEach((image) => {
+        let div = document.createElement("div");
+        div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
+    
+        let div2 = document.createElement("div");
+        div2.classList.add("w-200");
+    
+        let img = document.createElement("img");
+        img.classList.add("w-full", "h-full", "object-contain");
+        img.src = `http://localhost:3000/imagenes/${folder}/${image}`;
+        img.alt = "Imagen del carrusel";
+    
+        div2.appendChild(img);
+        div.appendChild(div2);
+        carouselWrapper.appendChild(div);
+    });
+
+    console.log(`Imágenes agregadas al DOM en ${carruselId}.`);
+
+    if (images.length > 1) startCarousel(carruselId);
+}
+
+function startCarousel(carruselId) {
+    const carousel = document.querySelector(`${carruselId} .carousel-content`);
+    const items = document.querySelectorAll(`${carruselId} .carousel-item`);
     let index = 0;
 
-    console.log("📸 Total imágenes en el carrusel:", items.length);
+    console.log(`📸 Total imágenes en ${carruselId}:`, items.length);
 
     if (items.length === 0) {
-        console.error("❌ No hay imágenes en el carrusel.");
+        console.error(`No hay imágenes en ${carruselId}.`);
         return;
     }
 
@@ -172,3 +173,4 @@ function startCarousel() {
 }
 
 loadImages();
+
