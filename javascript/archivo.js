@@ -95,6 +95,9 @@ async function loadImages() {
         const response1 = await fetch("/imagenes1");
         const response2 = await fetch("/imagenes2");
 
+        console.log("Ruta de carrusel_1:", response1);
+        console.log("Ruta de carrusel_2:", response2);
+
         if (!response1.ok || !response2.ok)
             throw new Error(`Error HTTP: ${response1.status} - ${response2.status}`);
 
@@ -164,8 +167,6 @@ function startCarousel(carruselId) {
     }, 3000);
 }
 
-console.log("Ruta de carrusel_1:", response1);
-console.log("Ruta de carrusel_2:", response2);
 
 loadImages();
 
