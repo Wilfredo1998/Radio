@@ -82,4 +82,6 @@ http.createServer((req, res) => {
         res.writeHead(404, { "Content-Type": "text/plain" });
         res.end("Página no encontrada");
     }
-}).listen(3000, () => console.log("Servidor corriendo en http://localhost:3000"));
+}).listen(process.env.PORT || 3000, () => {
+    console.log(`Servidor corriendo en http://localhost:${process.env.PORT || 3000}`);
+});
