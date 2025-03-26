@@ -59,9 +59,10 @@ http.createServer((req, res) => {
             if (err) {
                 console.error("❌ Error leyendo carrusel_2:", err);
                 res.writeHead(500, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ error: "No se pudieron leer las imágenes" }));
+                res.end(JSON.stringify({ error: "No se pudieron leer las imágenes", details: err.message }));
                 return;
             }
+            console.log("✅ Archivos en carrusel_2:", files);
             const images = files.filter(file => file.match(/\.(png|jpg|jpeg|gif)$/i));
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify(images));
