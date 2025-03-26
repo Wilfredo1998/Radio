@@ -4,9 +4,6 @@ const volumeControl = document.getElementById("volume");
 let audioContext, analyser, source, dataArray, bufferLength;
 const audio = document.querySelector("audio");
 
-
-
-
 function playRadio() {
     if (!audioContext) {
         initVisualizer();
@@ -21,21 +18,19 @@ function pauseRadio() {
 }
 
 function muteRadio() {
-    
-    if(audio.muted){
-        muted2()
-        if(audio.volume > 0){
-        document.getElementById("muted_boton").src = "./style/utility/images/Con_sonido.png";
-        document.getElementById("muted_boton2").src = "./style/utility/images/Con_sonido.png";
+    if (audio.muted) {
+        muted2();
+        if (audio.volume > 0) {
+            document.getElementById("muted_boton").src = "./style/utility/images/Con_sonido.png";
+            document.getElementById("muted_boton2").src = "./style/utility/images/Con_sonido.png";
         }
-        
-    }else{
-        muted1()
+    } else {
+        muted1();
         document.getElementById("muted_boton").src = "./style/utility/images/Sin_sonido.png";
         document.getElementById("muted_boton2").src = "./style/utility/images/Sin_sonido.png";
     }
-
 }
+
 function muted2() {
     audio.muted = false;
     if (audio.volume > 0) {
@@ -50,25 +45,21 @@ function muted1() {
     document.getElementById("muted_boton2").src = "./style/utility/images/Sin_sonido.png";
 }
 
-
 function setVolume(value) {
     audio.volume = value;
     if (audio.volume === 0) {
-        muted1()
-    }
-    else{
-        muted2()
+        muted1();
+    } else {
+        muted2();
     }
 }
 
-function PlayAndStop(){
-
+function PlayAndStop() {
     if (audio.paused) {
         playRadio();
     } else {
-        pauseRadio(); 
+        pauseRadio();
     }
-
 }
 
 function initVisualizer() {
@@ -101,10 +92,11 @@ function drawVisualizer() {
 
 async function loadImages() {
     try {
-        const response1 = await fetch("http://localhost:3000/imagenes1");
-        const response2 = await fetch("http://localhost:3000/imagenes2");
-        
-        if (!response1.ok || !response2.ok) throw new Error(`Error HTTP: ${response1.status} - ${response2.status}`);
+        const response1 = await fetch("/imagenes1");
+        const response2 = await fetch("/imagenes2");
+
+        if (!response1.ok || !response2.ok)
+            throw new Error(`Error HTTP: ${response1.status} - ${response2.status}`);
 
         const images1 = await response1.json();
         const images2 = await response2.json();
@@ -135,15 +127,15 @@ function updateCarousel(carruselId, images, folder) {
     images.forEach((image) => {
         let div = document.createElement("div");
         div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
-    
+
         let div2 = document.createElement("div");
         div2.classList.add("w-200");
-    
+
         let img = document.createElement("img");
         img.classList.add("w-full", "h-full", "object-contain");
-        img.src = `http://localhost:3000/imagenes/${folder}/${image}`;
+        img.src = `/imagenes/${folder}/${image}`;
         img.alt = "Imagen del carrusel";
-    
+
         div2.appendChild(img);
         div.appendChild(div2);
         carouselWrapper.appendChild(div);
