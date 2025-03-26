@@ -103,8 +103,8 @@ async function loadImages() {
 
         const images1 = await response1.json();
         const images2 = await response2.json();
-        console.log("Imágenes recibidas para carrusel1:", images1);
-        console.log("Imágenes recibidas para carrusel2:", images2);
+        console.log("Imágenes recibidas para carrusel1[archivo]:", images1);
+        console.log("Imágenes recibidas para carrusel2[archivo]:", images2);
 
         updateCarousel("#carrusel1", images1, "carrusel_1");
         updateCarousel("#carrusel2", images2, "carrusel_2");

@@ -90,5 +90,4 @@ http.createServer((req, res) => {
     console.log(`Servidor corriendo en http://localhost:${process.env.PORT || 3000}`);
 });
 
-console.log("Ruta de carrusel_1:", imageFolder1);
-console.log("Ruta de carrusel_2:", imageFolder2);
+
