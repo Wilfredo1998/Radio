@@ -38,8 +38,8 @@ http.createServer((req, res) => {
     }
 
     if (req.url === "/") {
-        serveFile(res, "index.html", "text/html");
-    } else if (req.url === "/imagenes1") {
+        serveFile(res, path.join(__dirname, "index.html"), "text/html");
+    }else if (req.url === "/imagenes1") {
         fs.readdir(imageFolder1, (err, files) => {
             if (err) {
                 res.writeHead(500, { "Content-Type": "application/json" });
