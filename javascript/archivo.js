@@ -103,17 +103,15 @@ async function loadImages() {
 
         updateCarousel("#carrusel1", images1, "carrusel_1");
         updateCarousel("#carrusel2", images2, "carrusel_2");
-
-        // Ocultar el preloader global cuando todas las imágenes se han cargado
-        document.getElementById("global-preloader").style.display = "none";
     } catch (error) {
         console.error("❌ Error cargando imágenes:", error);
-        document.getElementById("global-preloader").textContent = "Error cargando imágenes";
     }
 }
 
 function updateCarousel(carruselId, images, folder) {
     const carouselWrapper = document.querySelector(`${carruselId} .carousel-content`);
+    const preloader = document.querySelector(`${carruselId} .carrusel-preloader`);
+    
     if (!carouselWrapper) {
         console.error(`Error: No se encontró el contenedor de ${carruselId}`);
         return;
@@ -126,6 +124,8 @@ function updateCarousel(carruselId, images, folder) {
         return;
     }
 
+    let loadedImages = 0;
+
     images.forEach((image) => {
         let div = document.createElement("div");
         div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
@@ -133,28 +133,27 @@ function updateCarousel(carruselId, images, folder) {
         let div2 = document.createElement("div");
         div2.classList.add("w-200", "relative");
 
-        let divmessage = document.createElement("div");
-        divmessage.classList.add("w-200", "bg-gray-200", "preloader", "absolute", "top-0", "left-0", "w-full", "h-full", "flex", "items-center", "justify-center");
-        divmessage.textContent = "Cargando...";
-
         let img = document.createElement("img");
         img.classList.add("w-full", "h-full", "object-contain", "contenido");
         img.src = `/imagenes/${folder}/${image}`;
         img.alt = "Imagen del carrusel";
-        img.style.visibility = "hidden"; // Mantener la imagen invisible hasta que cargue
+        img.style.visibility = "hidden"; // Ocultar la imagen hasta que se cargue
 
         img.onload = function () {
-            divmessage.style.display = "none"; // Oculta el preloader
-            img.style.visibility = "visible"; // Hace visible la imagen
+            loadedImages++;
+            img.style.visibility = "visible";
+
+            // Si todas las imágenes están cargadas, ocultamos el preloader
+            if (loadedImages === images.length) {
+                preloader.style.display = "none";
+                carouselWrapper.style.visibility = "visible";
+            }
         };
 
-        div2.appendChild(divmessage);
         div2.appendChild(img);
         div.appendChild(div2);
         carouselWrapper.appendChild(div);
     });
-
-    console.log(`✅ Imágenes agregadas al DOM en ${carruselId}.`);
 
     if (images.length > 1) startCarousel(carruselId);
 }
@@ -175,7 +174,6 @@ function startCarousel(carruselId) {
     }, 3000);
 }
 
-// Mostrar el preloader al iniciar
 document.addEventListener("DOMContentLoaded", function () {
     console.log("El DOM está listo, pero aún se están cargando imágenes...");
     loadImages();
