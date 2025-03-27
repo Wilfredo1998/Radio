@@ -92,14 +92,18 @@ function drawVisualizer() {
 
 async function loadImages() {
     try {
-        const response1 = await fetch("/imagenes1");
-        const response2 = await fetch("/imagenes2");
+        const [response1, response2] = await Promise.all([
+            fetch("/imagenes1"),
+            fetch("/imagenes2"),
+        ]);
 
-        if (!response1.ok || !response2.ok)
+        if (!response1.ok || !response2.ok) 
             throw new Error(`Error HTTP: ${response1.status} - ${response2.status}`);
 
-        const images1 = await response1.json();
-        const images2 = await response2.json();
+        const [images1, images2] = await Promise.all([
+            response1.json(),
+            response2.json(),
+        ]);
 
         await updateCarousel("#carrusel1", images1, "carrusel_1");
         await updateCarousel("#carrusel2", images2, "carrusel_2");
@@ -111,55 +115,56 @@ async function loadImages() {
 async function updateCarousel(carruselId, images, folder) {
     const carouselWrapper = document.querySelector(`${carruselId} .carousel-content`);
     const preloader = document.querySelector(`${carruselId} .carrusel-preloader`);
-    
+    const carouselContainer = document.querySelector(carruselId);
+
     if (!carouselWrapper) {
         console.error(`Error: No se encontró el contenedor de ${carruselId}`);
         return;
     }
 
-    carouselWrapper.innerHTML = "";
-    
+    carouselWrapper.innerHTML = ""; 
+    carouselContainer.style.visibility = "hidden"; // Ocultar mientras carga
+
     if (images.length === 0) {
         console.error(`No se encontraron imágenes en ${folder}.`);
         return;
     }
 
+    preloader.style.display = "flex"; // Mostrar preloader
+
     let loadedImages = 0;
+    const loadImagePromises = images.map(image => new Promise((resolve) => {
+        const div = document.createElement("div");
+        div.classList.add("carousel-item");
 
-    // Mostrar preloader y ocultar carrusel antes de comenzar
-    preloader.style.display = "flex";
-    carouselWrapper.style.opacity = "0";
+        const img = new Image();
+        img.classList.add("w-full", "h-full", "object-contain"); // 🔹 Ajusta aquí
+        img.src = `/imagenes/${folder}/${image}`;
+        img.alt = "Imagen del carrusel";
 
-    const loadImagePromises = images.map(image => {
-        return new Promise((resolve) => {
-            let div = document.createElement("div");
-            div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
-
-            let div2 = document.createElement("div");
-            div2.classList.add("w-200");
-
-            let img = document.createElement("img");
-            img.classList.add("w-full", "h-full", "object-contain", "contenido");
-            img.src = `/imagenes/${folder}/${image}`;
-            img.alt = "Imagen del carrusel";
-
-            img.onload = function () {
-                loadedImages++;
-                resolve();
-            };
-
-            div2.appendChild(img);
-            div.appendChild(div2);
+        img.onload = function () {
+            loadedImages++;
+            div.appendChild(img);
             carouselWrapper.appendChild(div);
-        });
-    });
+            resolve();
+        };
 
-    // Esperar a que todas las imágenes carguen
+        img.onerror = function () {
+            console.error(`Error al cargar imagen: ${img.src}`);
+            resolve();
+        };
+    }));
+
+    // ✅ Esperar a que todas las imágenes carguen
     await Promise.all(loadImagePromises);
 
-    // Ocultar el preloader y mostrar el carrusel
-    preloader.style.display = "none";
-    carouselWrapper.style.opacity = "1";
+    preloader.style.display = "none"; // Ocultar preloader
+    carouselContainer.style.visibility = "visible"; // Mostrar carrusel
+
+    setTimeout(() => {
+        carouselWrapper.style.opacity = "1"; // Aplicar transición suave
+        carouselWrapper.style.display = "flex";
+    }, 100);
 
     if (images.length > 1) startCarousel(carruselId);
 }
@@ -173,6 +178,8 @@ function startCarousel(carruselId) {
         console.error(`No hay imágenes en ${carruselId}.`);
         return;
     }
+
+    carousel.style.transform = `translateX(0%)`; // 🔹 Asegura que empiece bien
 
     setInterval(() => {
         index = (index + 1) % items.length;

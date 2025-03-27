@@ -48,3 +48,36 @@
 
 
 
+/* Contenedor del carrusel */
+#carrusel1-container, #carrusel2-container {
+    width: 100%;
+    max-width: 800px; /* 🔹 Ajusta según tu necesidad */
+    height: 300px; /* 🔹 Ajusta según la altura deseada */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Contenedor interno */
+.carousel-content {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 100%;
+    transition: transform 0.7s ease-in-out;
+}
+
+/* Cada elemento del carrusel ocupa el 100% */
+.carousel-item {
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Las imágenes deben ajustarse completamente al carrusel */
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 🔹 Usa 'cover' si quieres que llene todo sin bordes blancos */
+}
