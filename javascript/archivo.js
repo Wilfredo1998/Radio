@@ -101,14 +101,14 @@ async function loadImages() {
         const images1 = await response1.json();
         const images2 = await response2.json();
 
-        updateCarousel("#carrusel1", images1, "carrusel_1");
-        updateCarousel("#carrusel2", images2, "carrusel_2");
+        await updateCarousel("#carrusel1", images1, "carrusel_1");
+        await updateCarousel("#carrusel2", images2, "carrusel_2");
     } catch (error) {
         console.error("❌ Error cargando imágenes:", error);
     }
 }
 
-function updateCarousel(carruselId, images, folder) {
+async function updateCarousel(carruselId, images, folder) {
     const carouselWrapper = document.querySelector(`${carruselId} .carousel-content`);
     const preloader = document.querySelector(`${carruselId} .carrusel-preloader`);
     
@@ -118,7 +118,7 @@ function updateCarousel(carruselId, images, folder) {
     }
 
     carouselWrapper.innerHTML = "";
-
+    
     if (images.length === 0) {
         console.error(`No se encontraron imágenes en ${folder}.`);
         return;
@@ -126,34 +126,40 @@ function updateCarousel(carruselId, images, folder) {
 
     let loadedImages = 0;
 
-    images.forEach((image) => {
-        let div = document.createElement("div");
-        div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
+    // Mostrar preloader y ocultar carrusel antes de comenzar
+    preloader.style.display = "flex";
+    carouselWrapper.style.opacity = "0";
 
-        let div2 = document.createElement("div");
-        div2.classList.add("w-200", "relative");
+    const loadImagePromises = images.map(image => {
+        return new Promise((resolve) => {
+            let div = document.createElement("div");
+            div.classList.add("carousel-item", "w-full", "flex", "justify-center", "shrink-0");
 
-        let img = document.createElement("img");
-        img.classList.add("w-full", "h-full", "object-contain", "contenido");
-        img.src = `/imagenes/${folder}/${image}`;
-        img.alt = "Imagen del carrusel";
-        img.style.visibility = "hidden"; // Ocultar la imagen hasta que se cargue
+            let div2 = document.createElement("div");
+            div2.classList.add("w-200");
 
-        img.onload = function () {
-            loadedImages++;
-            img.style.visibility = "visible";
+            let img = document.createElement("img");
+            img.classList.add("w-full", "h-full", "object-contain", "contenido");
+            img.src = `/imagenes/${folder}/${image}`;
+            img.alt = "Imagen del carrusel";
 
-            // Si todas las imágenes están cargadas, ocultamos el preloader
-            if (loadedImages === images.length) {
-                preloader.style.display = "none";
-                carouselWrapper.style.visibility = "visible";
-            }
-        };
+            img.onload = function () {
+                loadedImages++;
+                resolve();
+            };
 
-        div2.appendChild(img);
-        div.appendChild(div2);
-        carouselWrapper.appendChild(div);
+            div2.appendChild(img);
+            div.appendChild(div2);
+            carouselWrapper.appendChild(div);
+        });
     });
+
+    // Esperar a que todas las imágenes carguen
+    await Promise.all(loadImagePromises);
+
+    // Ocultar el preloader y mostrar el carrusel
+    preloader.style.display = "none";
+    carouselWrapper.style.opacity = "1";
 
     if (images.length > 1) startCarousel(carruselId);
 }
