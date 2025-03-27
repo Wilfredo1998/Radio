@@ -1,12 +1,14 @@
 {
   "name": "radio-streaming",
   "version": "1.0.0",
-  "main": "server.js",
   "scripts": {
-  "start": "node server.js"
-},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "start": "node server.js",
+    "build": "parcel build index.html --dist-dir public"
+  },
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.14.2"
+  }
 }
