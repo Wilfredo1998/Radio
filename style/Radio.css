@@ -51,8 +51,7 @@
 /* Contenedor del carrusel */
 #carrusel1-container, #carrusel2-container {
     width: 100%;
-    max-width: 800px; /* 🔹 Ajusta según tu necesidad */
-    height: 300px; /* 🔹 Ajusta según la altura deseada */
+    max-width: 800px;  
     overflow: hidden;
     position: relative;
 }

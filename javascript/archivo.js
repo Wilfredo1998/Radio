@@ -138,7 +138,7 @@ async function updateCarousel(carruselId, images, folder) {
         div.classList.add("carousel-item");
 
         const img = new Image();
-        img.classList.add("w-full", "h-full", "object-contain"); // 🔹 Ajusta aquí
+        img.classList.add("w-full", "h-full", "object-contain","rounded-lg"); // 🔹 Ajusta aquí
         img.src = `/imagenes/${folder}/${image}`;
         img.alt = "Imagen del carrusel";
 
