@@ -188,6 +188,6 @@ function startCarousel(carruselId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("El DOM está listo, pero aún se están cargando imágenes...");
+
     loadImages();
 });

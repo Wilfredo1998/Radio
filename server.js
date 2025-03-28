@@ -5,8 +5,6 @@ const path = require("path");
 const imageFolder1 = path.join(__dirname, "style/utility/carrusel_1");
 const imageFolder2 = path.join(__dirname, "style/utility/carrusel_2");
 
-console.log("Ruta de carrusel_1[server]:", imageFolder1);
-console.log("Ruta de carrusel_2:[server]", imageFolder2);
 
 const jsFolder = path.join(__dirname, "javascript");
 const cssFolder = path.join(__dirname, "style"); //Carpeta CSS
@@ -62,7 +60,7 @@ http.createServer((req, res) => {
                 res.end(JSON.stringify({ error: "No se pudieron leer las imágenes", details: err.message }));
                 return;
             }
-            console.log("✅ Archivos en carrusel_2:", files);
+
             const images = files.filter(file => file.match(/\.(png|jpg|jpeg|gif)$/i));
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify(images));
