@@ -193,19 +193,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function updateSlider(slider) {
+    if (!slider) return; // Evita errores si el elemento no existe
+
     const min = slider.min;
     const max = slider.max;
     const value = slider.value;
-  
+
     // Calcular porcentaje de progreso
     const percentage = ((value - min) / (max - min)) * 100;
-  
+
     // Aplicar fondo dinámico con degradado
     slider.style.background = `linear-gradient(to right, #007bff ${percentage}%, #ddd ${percentage}%)`;
-  }
-  
-  // Inicializar el color del slider cuando la página carga
-  document.addEventListener("DOMContentLoaded", function() {
+}
+
+// Asegurar que el script se ejecute cuando el DOM esté listo
+document.addEventListener("DOMContentLoaded", function() {
     const slider = document.getElementById("volume");
-    updateSlider(slider);
-  });
+    if (slider) {
+        updateSlider(slider);
+        slider.addEventListener("input", () => updateSlider(slider)); // Actualizar al mover el slider
+    }
+});
