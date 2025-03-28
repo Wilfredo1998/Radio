@@ -122,7 +122,7 @@ async function updateCarousel(carruselId, images, folder) {
         return;
     }
 
-    carouselWrapper.innerHTML = ""; 
+    carouselWrapper.innerHTML = "";
     carouselContainer.style.visibility = "hidden"; // Ocultar mientras carga
 
     if (images.length === 0) {
@@ -132,58 +132,88 @@ async function updateCarousel(carruselId, images, folder) {
 
     preloader.style.display = "flex"; // Mostrar preloader
 
-    let loadedImages = 0;
-    const loadImagePromises = images.map(image => new Promise((resolve) => {
-        const div = document.createElement("div");
-        div.classList.add("carousel-item");
+    const visibleImages = 3; // Número de imágenes visibles antes de precargar más
 
-        const img = new Image();
-        img.classList.add("w-full", "h-full", "object-contain","sm:w-[600px]","md:w-[800px]","lg:w-[1000px]");
-        img.src = `/imagenes/${folder}/${image}`;
-        img.alt = "Imagen del carrusel";
+    function loadImage(imageSrc) {
+        return new Promise((resolve) => {
+            const div = document.createElement("div");
+            div.classList.add("carousel-item");
 
-        img.onload = function () {
-            loadedImages++;
-            div.appendChild(img);
-            carouselWrapper.appendChild(div);
-            resolve();
-        };
+            const img = new Image();
+            img.classList.add("w-full", "h-full", "object-contain", "sm:w-[600px]", "md:w-[800px]", "lg:w-[1000px]");
+            img.src = `/imagenes/${folder}/${imageSrc}`;
+            img.alt = "Imagen del carrusel";
 
-        img.onerror = function () {
-            console.error(`Error al cargar imagen: ${img.src}`);
-            resolve();
-        };
-    }));
+            img.onload = function () {
+                div.appendChild(img);
+                carouselWrapper.appendChild(div);
+                resolve(div);
+            };
 
-    // ✅ Esperar a que todas las imágenes carguen
-    await Promise.all(loadImagePromises);
+            img.onerror = function () {
+                console.error(`Error al cargar imagen: ${img.src}`);
+                resolve(null);
+            };
+        });
+    }
+
+    // Cargar solo las primeras 3 imágenes
+    const initialLoad = images.slice(0, visibleImages).map(loadImage);
+    await Promise.all(initialLoad);
 
     preloader.style.display = "none"; // Ocultar preloader
     carouselContainer.style.visibility = "visible"; // Mostrar carrusel
 
     setTimeout(() => {
-        carouselWrapper.style.opacity = "1"; // Aplicar transición suave
+        carouselWrapper.style.opacity = "1";
         carouselWrapper.style.display = "flex";
     }, 100);
 
-    if (images.length > 1) startCarousel(carruselId);
+    if (images.length > 1) startCarousel(carruselId, images, folder, visibleImages);
 }
 
-function startCarousel(carruselId) {
+function startCarousel(carruselId, images, folder, visibleImages) {
     const carousel = document.querySelector(`${carruselId} .carousel-content`);
-    const items = document.querySelectorAll(`${carruselId} .carousel-item`);
     let index = 0;
+    let loadedCount = visibleImages; // Mantiene el conteo de imágenes cargadas
 
-    if (items.length === 0) {
+    if (!carousel) {
         console.error(`No hay imágenes en ${carruselId}.`);
         return;
     }
 
-    carousel.style.transform = `translateX(0%)`; // 🔹 Asegura que empiece bien
+    carousel.style.transform = `translateX(0%)`;
+
+    async function loadNextImage() {
+        if (loadedCount >= images.length) return; // No cargar más si ya se agregaron todas
+
+        const imageSrc = images[loadedCount];
+        const div = document.createElement("div");
+        div.classList.add("carousel-item");
+
+        const img = new Image();
+        img.classList.add("w-full", "h-full", "object-contain", "sm:w-[600px]", "md:w-[800px]", "lg:w-[1000px]");
+        img.src = `/imagenes/${folder}/${imageSrc}`;
+        img.alt = "Imagen del carrusel";
+
+        img.onload = function () {
+            div.appendChild(img);
+            carousel.appendChild(div);
+            loadedCount++;
+        };
+
+        img.onerror = function () {
+            console.error(`Error al cargar imagen: ${img.src}`);
+        };
+    }
 
     setInterval(() => {
-        index = (index + 1) % items.length;
+        index = (index + 1) % images.length;
         carousel.style.transform = `translateX(-${index * 100}%)`;
+
+        if (index >= loadedCount - 2) {
+            loadNextImage(); // Carga la siguiente imagen cuando quedan 2 visibles
+        }
     }, 3000);
 }
 
