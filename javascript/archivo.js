@@ -108,7 +108,7 @@ async function loadImages() {
         await updateCarousel("#carrusel1", images1, "carrusel_1");
         await updateCarousel("#carrusel2", images2, "carrusel_2");
     } catch (error) {
-        console.error("❌ Error cargando imágenes:", error);
+        console.error("Error cargando imágenes:", error);
     }
 }
 
@@ -138,7 +138,7 @@ async function updateCarousel(carruselId, images, folder) {
         div.classList.add("carousel-item");
 
         const img = new Image();
-        img.classList.add("w-full", "h-full", "object-contain"); // 🔹 Ajusta aquí
+        img.classList.add("w-full", "h-full", "object-contain","sm:w-[600px]","md:w-[800px]","lg:w-[1000px]");
         img.src = `/imagenes/${folder}/${image}`;
         img.alt = "Imagen del carrusel";
 

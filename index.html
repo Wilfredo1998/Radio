@@ -20,8 +20,8 @@
         
         <div class="h-16 lg:h-full flex flex-row items-center lg:justify-center gap-2">
             <div class=" w-18 lg:w-24 h-full flex justify-center items-center">
-                <img class="h-full p-1 lg:hidden block" loading="eager" src="./style/utility/images/New_logo.png" alt="Imagen Logo">
-                <img class="h-full p-1 hidden  lg:block" loading="eager" src="./style/utility/images/Logo_E.png" alt="Imagen Logo">
+                <img class="h-full p-1 lg:hidden block max-w-[72px]" loading="eager" src="./style/utility/images/New_logo.png" alt="Imagen Logo">
+                <img class="h-full p-1 hidden  lg:block max-w-[96px]" loading="eager" src="./style/utility/images/Logo_E.png" alt="Imagen Logo">
             </div>
             <h1  class=" lg:w-40 lg:w-auto flex items-center text-xl h-full font-[AvenirBlackOblique] lg:text-white">Voz Fuente de Amor</h1>
         </div>
@@ -29,9 +29,7 @@
         <!-- Reproductor -->
         <div id="reproductor" class="h-full flex flex-col lg:flex-row lg:items-center w-full lg:w-auto">
             <canvas id="visualizer" class="bg-white h-20 lg:h-32 sm:h-20 lg:h-full w-full lg:w-[700px] lg:rounded-full"></canvas>
-            
-            
-            
+    
             <div class="bg-[#1172BA] lg:flex lg:flex-row lg:items-center">
                 <!-- Botones -->
             <div class="flex flex-row items-center justify-center space-x-4 p-2 ">
@@ -39,13 +37,13 @@
                     <img id="P_a_s" class="h-10 lg:h-10" src="./style/utility/images/Play.png" alt="Play">
                 </button>
                 <button  class="h-12 lg:h-full  p-2  hidden  lg:block lg:max-w-[60px]" onclick="muteRadio()">
-                    <img id="muted_boton" class="muted_boton h-10 lg:h-10 cursor-pointer" src="./style/utility/images/Con_sonido.png" alt="Mute">
+                    <img id="muted_boton" class="muted_boton h-10 lg:h-10 lg:max-w-[60px] cursor-pointer" src="./style/utility/images/Con_sonido.png" alt="Mute">
                 </button>
             </div>
             <div class="flex items-center justify-center px-3 ">
                 <div class="flex items-center space-x-2">
                     <button class="h-10 p-2 lg:hidden block w-[45px]" onclick="muteRadio()">
-                        <img id="muted_boton2" class="muted_boton h-full" src="./style/utility/images/Con_sonido.png" alt="Mute">
+                        <img id="muted_boton2" class="muted_boton h-full max-w-[45px]" src="./style/utility/images/Con_sonido.png" alt="Mute">
                     </button>
                     <label class="font-[AvenirBookOblique]" for="volume">Volumen:</label>
                     <input class="slider" type="range" id="volume" min="0" max="1" step="0.1" value="0.5" oninput="updateSlider(this)">
