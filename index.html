@@ -47,7 +47,8 @@
                         <img id="muted_boton2" class="muted_boton h-full" src="./style/utility/images/Con_sonido.png" alt="Mute">
                     </button>
                     <label class="font-[AvenirBookOblique]" for="volume">Volumen:</label>
-                    <input class="cursor-pointer" type="range" id="volume" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
+                    <input class="slider" type="range" id="volume" min="0" max="1" step="0.1" value="0.5" oninput="updateSlider(this)">
+
                 </div>
             </div>
         </div>

@@ -191,3 +191,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadImages();
 });
+
+function updateSlider(slider) {
+    const min = slider.min;
+    const max = slider.max;
+    const value = slider.value;
+  
+    // Calcular porcentaje de progreso
+    const percentage = ((value - min) / (max - min)) * 100;
+  
+    // Aplicar fondo dinámico con degradado
+    slider.style.background = `linear-gradient(to right, #007bff ${percentage}%, #ddd ${percentage}%)`;
+  }
+  
+  // Inicializar el color del slider cuando la página carga
+  document.addEventListener("DOMContentLoaded", function() {
+    const slider = document.getElementById("volume");
+    updateSlider(slider);
+  });
