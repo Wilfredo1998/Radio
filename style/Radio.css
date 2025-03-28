@@ -44,9 +44,35 @@
     font-style: oblique;
 }
 
-
-
-
+input[type="range"] {
+    -webkit-appearance: none; /* Elimina el estilo por defecto en WebKit */
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  /* Personalizar el "thumb" (botón deslizante) en WebKit (Chrome, Edge, Safari) */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* Personalizar el "thumb" en Firefox */
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 
 /* Contenedor del carrusel */
 #carrusel1-container, #carrusel2-container {
@@ -65,7 +91,6 @@
     transition: transform 0.7s ease-in-out;
 }
 
-/* Cada elemento del carrusel ocupa el 100% */
 .carousel-item {
     flex: 0 0 100%;
     height: 100%;
@@ -74,9 +99,8 @@
     align-items: center;
 }
 
-/* Las imágenes deben ajustarse completamente al carrusel */
 .carousel-item img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* 🔹 Usa 'cover' si quieres que llene todo sin bordes blancos */
+    object-fit: contain; 
 }
