@@ -2,6 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
+
 const imageFolder1 = path.join(__dirname, "style/utility/carrusel_1");
 const imageFolder2 = path.join(__dirname, "style/utility/carrusel_2");
 
@@ -26,6 +27,11 @@ function serveFile(res, filePath, contentType) {
             res.end(content);
         }
     });
+}
+
+function isValidPath(baseFolder, requestedPath) {
+    const normalizedPath = path.normalize(requestedPath);
+    return normalizedPath.startsWith(baseFolder);
 }
 
 //Servidor HTTP
@@ -55,7 +61,7 @@ http.createServer((req, res) => {
     } else if (req.url === "/imagenes2") {
         fs.readdir(imageFolder2, (err, files) => {
             if (err) {
-                console.error("❌ Error leyendo carrusel_2:", err);
+                console.error("Error leyendo carrusel_2:", err);
                 res.writeHead(500, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "No se pudieron leer las imágenes", details: err.message }));
                 return;
@@ -68,11 +74,18 @@ http.createServer((req, res) => {
     } else if (req.url.startsWith("/imagenes/carrusel_1/")) {
         const imageName = req.url.replace("/imagenes/carrusel_1/", "");
         const filePath = path.join(imageFolder1, imageName);
-        serveFile(res, filePath, "image/png");
+        if (!isValidPath(imageFolder1, filePath)) {
+            res.writeHead(403, { "Content-Type": "text/plain" });
+            return res.end("Acceso denegado");
+        }serveFile(res, filePath, "image/png");
     } else if (req.url.startsWith("/imagenes/carrusel_2/")) {
         const imageName = req.url.replace("/imagenes/carrusel_2/", "");
         const filePath = path.join(imageFolder2, imageName);
-        serveFile(res, filePath, "image/png");
+        const normalizedPath = path.normalize(filePath);
+        if (!normalizedPath.startsWith(imageFolder2)) {
+            res.writeHead(403, { "Content-Type": "text/plain" });
+            return res.end("Acceso denegado");
+        }serveFile(res, filePath, "image/png");
     } else if (req.url.startsWith("/javascript/")) {
         const jsFileName = req.url.replace("/javascript/", "");
         const jsFilePath = path.join(jsFolder, jsFileName);
