@@ -134,7 +134,7 @@ async function updateCarousel(carruselId, images, folder) {
 
     const visibleImages = 3; // Número de imágenes visibles antes de precargar más
 
-    function loadImage(imageSrc) {
+    function loadImage(imageSrc, isFirstLoad = false) {
         return new Promise((resolve) => {
             const div = document.createElement("div");
             div.classList.add("carousel-item");
@@ -143,6 +143,12 @@ async function updateCarousel(carruselId, images, folder) {
             img.classList.add("w-full", "h-full", "object-contain", "sm:w-[600px]", "md:w-[800px]", "lg:w-[1000px]");
             img.src = `/imagenes/${folder}/${imageSrc}`;
             img.alt = "Imagen del carrusel";
+
+            if(isFirstLoad){
+                img.loading = "eager"
+            }else{
+                img.loading = "lazy"
+            }
 
             img.onload = function () {
                 div.appendChild(img);
@@ -158,7 +164,8 @@ async function updateCarousel(carruselId, images, folder) {
     }
 
     // Cargar solo las primeras 3 imágenes
-    const initialLoad = images.slice(0, visibleImages).map(loadImage);
+    //const initialLoad = images.slice(0, visibleImages).map(loadImage);
+    const initialLoad = images.slice(0, 3).map(img => loadImage(img, true));
     await Promise.all(initialLoad);
 
     preloader.style.display = "none"; // Ocultar preloader
@@ -208,6 +215,10 @@ function startCarousel(carruselId, images, folder, visibleImages) {
     }
 
     setInterval(() => {
+        if (loadedCount < images.length && index >= loadedCount - 2) {
+            loadNextImage();
+        }
+
         index = (index + 1) % images.length;
         carousel.style.transform = `translateX(-${index * 100}%)`;
 
