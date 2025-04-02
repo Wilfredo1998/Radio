@@ -14,7 +14,7 @@
   ],
   "headers": [
     {
-      "source": "/fonts/(.*).woff2",
+      "source": "/utility/(.*).woff2",
       "headers": [
         {
           "key": "Content-Type",
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/images/(.*).gif",
+      "source": "/utility/(.*).gif",
       "headers": [
         {
           "key": "Content-Type",
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "source": "/images/(.*).jpeg",
+      "source": "/utility/(.*).jpeg",
       "headers": [
         {
           "key": "Content-Type",
