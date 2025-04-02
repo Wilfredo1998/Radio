@@ -11,5 +11,34 @@
       "src": "/(.*)",
       "dest": "/server.js"
     }
+  ],
+  "headers": [
+    {
+      "source": "/utility/(.*).woff2",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "font/woff2"
+        }
+      ]
+    },
+    {
+      "source": "/utility/(.*).gif",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/gif"
+        }
+      ]
+    },
+    {
+      "source": "/utility/(.*).jpeg",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/jpeg"
+        }
+      ]
+    }
   ]
 }
