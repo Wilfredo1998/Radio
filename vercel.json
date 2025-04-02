@@ -9,18 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/utility/(.*)\\.(woff2|gif|jpeg)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/octet-stream"
-        }
-      ]
+      "dest": "/server.js"
     }
   ]
 }
