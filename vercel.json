@@ -9,34 +9,16 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "server.js"
     }
   ],
   "headers": [
     {
-      "source": "/utility/(.*).woff2",
+      "source": "/utility/(.*)\\.(woff2|gif|jpeg)",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "font/woff2"
-        }
-      ]
-    },
-    {
-      "source": "/utility/(.*).gif",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/gif"
-        }
-      ]
-    },
-    {
-      "source": "/utility/(.*).jpeg",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/jpeg"
+          "value": "application/octet-stream"
         }
       ]
     }
