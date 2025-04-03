@@ -4,19 +4,6 @@ const volumeControl = document.getElementById("volume");
 let audioContext, analyser, source, dataArray, bufferLength;
 const audio = document.querySelector("audio");
 
-function playRadio() {
-    if (!audioContext) {
-        initVisualizer();
-    }
-    document.getElementById("P_a_s").src = "./style/utility/images/stop.png";
-    audio.play();
-}
-
-function pauseRadio() {
-    document.getElementById("P_a_s").src = "./style/utility/images/Play.png";
-    audio.pause();
-}
-
 function muteRadio() {
     if (audio.muted) {
         muted2();
@@ -51,14 +38,6 @@ function setVolume(value) {
         muted1();
     } else {
         muted2();
-    }
-}
-
-function PlayAndStop() {
-    if (audio.paused) {
-        playRadio();
-    } else {
-        pauseRadio();
     }
 }
 
