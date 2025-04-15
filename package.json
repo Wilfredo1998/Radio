@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "build": "echo 'No build step required'",
+    "build:css": "tailwindcss -i ./style/input.css -o ./style/output.css --minify",
     "start": "node server.js"
   },
   "keywords": [],
@@ -11,5 +11,8 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
   }
 }
