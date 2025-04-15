@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
     </script>
 
 </head>
-<body class="w-full h-full min-h-screen font-[AvenirBookOblique]">
+<body class="flex flex-col min-h-screen font-[AvenirBookOblique]">
     <audio id="radio" crossorigin="anonymous" preload="metadata">
         <source src="https://cast6.my-control-panel.com/proxy/fuentede/stream" type="audio/mpeg">
     </audio>
@@ -72,46 +72,52 @@
         </div>
     </header>
 
-    <div class="w-full bg-white flex justify-center p-2">
-        <div id="carrusel1-container" class="relative w-full   h-[300px] lg:h-[500px] overflow-hidden rounded-lg">
-            <div id="carrusel1" class="w-full h-full">
-                <div class="carrusel-preloader absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
-                    <p class="text-lg font-text-gray-600">Cargando imágenes...</p>
-                </div>
-                <div class="carousel-content flex w-full h-full transition-transform duration-700 ease-in-out opacity-0 transform translate-x-0">
-                    <!-- Imágenes aquí -->
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="w-full bg-white flex justify-center p-2">
-        <div id="carrusel2-container" class="relative w-full h-[300px] lg:h-[500px] overflow-hidden rounded-lg">
-            <div id="carrusel2" class="w-full h-full">
-                <div class="carrusel-preloader absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
-                    <p class="text-lg text-gray-600">Cargando imágenes...</p>
-                </div>
-                <div class="carousel-content flex w-full h-full transition-transform duration-700 ease-in-out opacity-0 transform translate-x-0">
-                    <!-- Imágenes aquí -->
+    <main class="flex-1">
+        <div class="w-full bg-white flex justify-center p-2">
+            <div id="carrusel1-container" class="relative w-full   h-[300px] lg:h-[500px] overflow-hidden rounded-lg">
+                <div id="carrusel1" class="w-full h-full">
+                    <div class="carrusel-preloader absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
+                        <p class="text-lg font-text-gray-600">Cargando imágenes...</p>
+                    </div>
+                    <div class="carousel-content flex w-full h-full transition-transform duration-700 ease-in-out opacity-0 transform translate-x-0">
+                        <!-- Imágenes aquí -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        
+        <div class="w-full bg-white flex justify-center p-2">
+            <div id="carrusel2-container" class="relative w-full h-[300px] lg:h-[500px] overflow-hidden rounded-lg">
+                <div id="carrusel2" class="w-full h-full">
+                    <div class="carrusel-preloader absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
+                        <p class="text-lg text-gray-600">Cargando imágenes...</p>
+                    </div>
+                    <div class="carousel-content flex w-full h-full transition-transform duration-700 ease-in-out opacity-0 transform translate-x-0">
+                        <!-- Imágenes aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 
     <footer class="customBlueDark w-full max-h-65 h-auto lg:h-35 p-3 text-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="">
             <ul class="">
                 <ol class="font-[AvenirMediumOblique]">
-                    <h2 class="text-[18px] mt-4">Dirección</h2>
+                    <li>
+                        <h2 class="text-[18px] mt-4">Dirección</h2>
+                    </li>
                 </ol>
             </ul>
             <ul>
-                <ol>                
-                    <p class="text-[14px] mt-1"> 
-                        Calle Carmen Mendoza de Corniel no. 35,<br> Enseñanza. Quisqueya,<br>
-                        Santo Domingo, D.N, República Dominicana
-                    </p>
+                <ol>    
+                    <li>
+                        <p class="text-[14px] mt-1"> 
+                            Calle Carmen Mendoza de Corniel no. 35,<br> Enseñanza. Quisqueya,<br>
+                            Santo Domingo, D.N, República Dominicana
+                        </p>
+                    </li>            
                 </ol>
             </ul>
         </div>
